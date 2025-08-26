@@ -34,14 +34,19 @@ return [
     | Supported: "session"
     |
     */
-
+'defaults' => [
+    'guard' => 'api',
+    'passwords' => 'users',
+],
     'guards' => [
-        'web' => [
-            'driver' => 'session',
+        'api' => [
+            'driver' => 'jwt',
             'provider' => 'users',
         ],
     ],
 
+
+    
     /*
     |--------------------------------------------------------------------------
     | User Providers
