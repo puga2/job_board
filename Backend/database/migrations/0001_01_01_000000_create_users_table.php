@@ -19,8 +19,7 @@ return new class extends Migration
             $table->string('phone', 20)->nullable();
             $table->string('password',255);
             $table->string('avatar',255)->nullable();
-            $table->enum('role',['admin','employee','job_seeker']);
-            $table->rememberToken();
+            $table->enum('role',['admin','employee','job_seeker'])->default('job_seeker');
             $table->timestamps();
         });
 

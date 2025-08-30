@@ -44,6 +44,12 @@ class User extends Authenticatable implements JWTSubject,MustVerifyEmail
          'role'
     ];
 
+    public function companies()
+    {
+        // One-to-one relationship: A user has one company
+        return $this->hasOne(Company::class);
+   
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
