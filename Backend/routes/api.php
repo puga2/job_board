@@ -37,7 +37,8 @@ Route::middleware(('auth:api'))->group(function(){
     Route::get('/companies',[CompanyController::class,'index']);
     Route::post('/companies',[CompanyController::class,'apply']);
     Route::get('/companies/{id}',[CompanyController::class,'show']);
-    Route::put('/companies/{id}',[CompanyController::class,'update']);
+    Route::patch('/companies/{id}',[CompanyController::class,'update']);
+    Route::patch('/companies/{id}/change-status',[CompanyController::class,'ChangeStatus']);
     // Route::delete('/companies/{id}',[CompanyController::class,'destroy']);
 });
 
@@ -45,3 +46,5 @@ Route::middleware(('auth:api'))->group(function(){
 Route::middleware(['auth:api','verified'])->get('/dashboard',function(){
     return response()->json((['message'=>'Welcome to your dashboard']));
 });
+
+

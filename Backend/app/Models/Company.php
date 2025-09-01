@@ -14,6 +14,7 @@ class Company extends Model
            'website',
            'logo',
            'description',
+           'status'
        ];
     public function user()
     {
