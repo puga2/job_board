@@ -52,7 +52,7 @@ CREATE TABLE locations (
     id INT AUTO_INCREMENT PRIMARY KEY,
     city VARCHAR(100) NOT NULL,
     state VARCHAR(100),
-    country VARCHAR(100) NOT NULL
+    -- country VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE jobs (

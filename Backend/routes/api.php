@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +41,13 @@ Route::middleware(('auth:api'))->group(function(){
     Route::patch('/companies/{id}',[CompanyController::class,'update']);
     Route::patch('/companies/{id}/change-status',[CompanyController::class,'ChangeStatus']);
     // Route::delete('/companies/{id}',[CompanyController::class,'destroy']);
+
+    //Category
+    Route::get('/categories',[CategoryController::class,'index']);
+    Route::post('/categories',[CategoryController::class,'store']);
+    Route::get('/categories/{id}',[CategoryController::class,'show']);
+    Route::patch('/categories/{id}',[CategoryController::class,'update']);
+    Route::delete('/categories/{id}',[CategoryController::class,'destroy']);
 });
 
 // Protected + verified route
