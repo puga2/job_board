@@ -32,7 +32,9 @@ class AuthController extends Controller
 
     // Register
     public function register(Request $request)
-    {
+    {   
+
+        // job_seeker should recieve id in ?
         // Validation should be added here (e.g., using $request->validate())
         if (User::where('email', $request->email)->exists()) {
             return response()->json(['message' => 'Email already registered'], 422);
@@ -46,9 +48,10 @@ class AuthController extends Controller
             'role' => $request->role ?? 'job_seeker',
         ]);
 
-        // Send signed email verification link
-        $user->sendEmailVerificationNotification();
-
+        // Create job_seeker profile
+        // if ($user->role === 'job_seeker') {
+        //     $user->job_seeker()->create();
+        // }
         // Optionally issue a token after verification (not immediately)
         // For now, return without token until email is verified
         return response()->json([

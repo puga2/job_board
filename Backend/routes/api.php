@@ -4,6 +4,8 @@ use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\EmploymentTypeController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -48,6 +50,24 @@ Route::middleware(('auth:api'))->group(function(){
     Route::get('/categories/{id}',[CategoryController::class,'show']);
     Route::patch('/categories/{id}',[CategoryController::class,'update']);
     Route::delete('/categories/{id}',[CategoryController::class,'destroy']);
+    // Locations
+
+    Route::get('/locations',[LocationController::class,'index']);
+    Route::post('/locations',[LocationController::class,'store']);
+    Route::get('/locations/{id}',[LocationController::class,'show']);
+    Route::patch('/locations/{id}',[LocationController::class,'update']);
+    Route::delete('/locations/{id}',[LocationController::class,'destroy']);
+
+    // Employment Types
+    Route::get('/types',[EmploymentTypeController::class,'index']);
+    Route::post('/types',[EmploymentTypeController::class,'store']);
+    Route::get('/types/{id}',[EmploymentTypeController::class,'show']);
+    Route::patch('/types/{id}',[EmploymentTypeController::class,'update']);
+    Route::delete('/types/{id}',[EmploymentTypeController::class,'destroy']);
+
+    // Job Seekers
+    Route::get('/job-seekers',[UserController::class,'getProfile']);
+    Route::post('/job-seekers/{id}',[UserController::class,'saveSeeker']);
 });
 
 // Protected + verified route

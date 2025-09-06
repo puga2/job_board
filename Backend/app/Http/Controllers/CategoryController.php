@@ -68,7 +68,7 @@ class CategoryController extends Controller
         ]);
         $category->update($data);
 
-        return response()->json(['message'=>'Category updated successfully','data'=>$category]);
+        return response()->json(['message'=>'Category updated successfully','data'=>$category->only(['id','name','description'])]);
     }
 
     /**

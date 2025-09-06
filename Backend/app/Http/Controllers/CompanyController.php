@@ -28,7 +28,6 @@ class CompanyController extends Controller
         
         
         $data = $request->validate([
-
             'company_name'=> [
                 'required','string','max:150',
                 Rule::unique('companies','company_name')
