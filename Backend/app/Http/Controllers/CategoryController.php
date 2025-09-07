@@ -14,9 +14,18 @@ class CategoryController extends Controller
     public function index()
     {
         //get all categories
-        return response()->json(['data'=>Category::all()]);
+        return response()->json(['data'=>Category::with('job_functions')->get()]);
     }
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+    
 
+        return response()->json(['data'=>Category::with('job_functions')->findOrFail($id)],200);
+
+    }
     /**
      * Store a newly created resource in storage.
      */
@@ -36,21 +45,7 @@ class CategoryController extends Controller
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-        $category = Category::find($id);
 
-        if(!$category){
-            return response()->json(['message'=>'Category not found'],404);
-        }
-
-        return response()->json(['data'=>$category]);
-
-    }
 
     /**
      * Update the specified resource in storage.

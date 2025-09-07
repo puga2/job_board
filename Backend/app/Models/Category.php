@@ -13,4 +13,10 @@ class Category extends Model
         'name',
         'description',
     ];
+    public function job_functions(){
+        return $this->hasMany(Job_function::class);
+    }
+    public function jobs(){
+        return $this->hasManyThrough(Job::class,Job_function::class,'category_id','job_function_id');
+    }
 }

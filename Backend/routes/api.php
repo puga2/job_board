@@ -5,8 +5,11 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmploymentTypeController;
+use App\Http\Controllers\JobController;
+use App\Http\Controllers\JobFunctionController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\UserController;
+use App\Models\Job;
 use Illuminate\Support\Facades\Route;
 
 
@@ -68,6 +71,19 @@ Route::middleware(('auth:api'))->group(function(){
     // Job Seekers
     Route::get('/job-seekers',[UserController::class,'getProfile']);
     Route::post('/job-seekers/{id}',[UserController::class,'saveSeeker']);
+
+    //job functions
+    Route::get('/job-functions',[JobFunctionController::class,'index']);
+    Route::post('/job-functions',[JobFunctionController::class,'store']);
+    Route::get('/job-functions/{id}',[JobFunctionController::class,'show']);
+    Route::patch('/job-functions/{id}',[JobFunctionController::class,'update']);
+    Route::delete('/job-functions/{id}',[JobFunctionController::class,'destroy']);
+
+    // job posts
+    Route::get('/jobs',[JobController::class,'index']);
+    Route::post('/jobs',[JobController::class,'store']);
+    Route::patch('/jobs/{id}',[JobController::class,'update']);
+    Route::delete('/jobs/{id}',[JobController::class,'destroy']);
 });
 
 // Protected + verified route

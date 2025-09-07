@@ -12,16 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         //
-        Schema::create('jobs',function(Blueprint $table){
+        Schema::create('job_posts',function(Blueprint $table){
             $table->id();
             $table->string('title',255);
             $table->text('description');
-            $table->decimal('salary',10,2);
+            $table->decimal('salary_min',10,2);
+            $table->decimal('salary_max',10,2);
             $table->foreignId('company_id')->constrained()->cascadeOnDelete();
             $table->foreignId('job_function_id')->constrained()->cascadeOnDelete();
             $table->foreignId('employment_type_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('location_id')->constrained()->cascadeOnDelete();
             $table->enum('status',['draft','published','closed'])->default('draft');
             $table->dateTime('posted_at');
+            $table->dateTime('expires_at')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +35,6 @@ return new class extends Migration
     public function down(): void
     {
         //
-        Schema::dropIfExists('jobs');
+        Schema::dropIfExists('job_posts');
     }
 };
