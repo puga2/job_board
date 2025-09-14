@@ -53,6 +53,7 @@ class User extends Authenticatable implements JWTSubject,MustVerifyEmail
     {
         return $this->hasOne(Job_seeker::class);
     }
+    
     public function companies()
     {
         // One-to-one relationship: A user has one company

@@ -54,6 +54,9 @@ class AuthController extends Controller
         // }
         // Optionally issue a token after verification (not immediately)
         // For now, return without token until email is verified
+         // Send signed email verification link
+        $user->sendEmailVerificationNotification();
+
         return response()->json([
             'message' => 'Please verify your email',
             'user' => $user
