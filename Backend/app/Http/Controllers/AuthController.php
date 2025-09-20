@@ -61,11 +61,32 @@ class AuthController extends Controller
             'message' => 'Please verify your email',
             'user' => $user
         ], 201);
+//         return response()->json([
+//     'message' => 'Please verify your email',
+//     'user'    => [
+//         'id'     => $user->id,
+//         'name'   => $user->name,
+//         'email'  => $user->email,
+//         'role'   => $user->role,
+//         // full URL for frontend
+//         'avatar' => $user->avatar ? asset('storage/' . $user->avatar) : null,
+//     ]
+// ], 201);
     }
 
     public function me()
     {
-        return response()->json(auth('api')->user());
+        $user = auth('api')->user();
+       return response()->json([
+    'id'         => $user->id,
+    'name'       => $user->name,
+    'email'      => $user->email,
+    'phone'      => $user->phone,
+    'avatar'     => $user->avatar ? asset('storage/' . $user->avatar) : null,
+    'role'       => $user->role,
+    'created_at' => $user->created_at,
+    'updated_at' => $user->updated_at,
+]);
     }
 
     // logout
