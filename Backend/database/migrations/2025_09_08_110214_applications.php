@@ -4,19 +4,18 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
         //
-        Schema::create('applications',function(Blueprint $table){
+        Schema::create('applications', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('job_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('job_seeker_id')->constrained()->cascadeOnDelete();
-            $table->string('cover_letter',255);
+            $table->foreignId('job_post_id')->constrained('job_posts')->cascadeOnDelete();
+            $table->foreignId('job_seeker_id')->constrained('job_seekers', 'user_id')->cascadeOnDelete();
+            $table->string('cover_letter', 255);
             $table->dateTime('applied_at')->default(now());
             $table->timestamps();
         });

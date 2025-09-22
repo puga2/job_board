@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
@@ -84,6 +85,12 @@ Route::middleware(('auth:api'))->group(function(){
     Route::post('/jobs',[JobController::class,'store']);
     Route::patch('/jobs/{id}',[JobController::class,'update']);
     Route::delete('/jobs/{id}',[JobController::class,'destroy']);
+
+    // Applications
+    Route::post('applications',[ApplicationController::class,'store']);
+    Route::get('applications',[ApplicationController::class,'index']);
+    Route::patch('applications/{id}',[ApplicationController::class,'update']);
+    Route::delete('applications/{id}',[ApplicationController::class,'destroy']);
 });
 
 // Protected + verified route

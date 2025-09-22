@@ -34,7 +34,18 @@ class UserController extends Controller
             return response()->json(['message'=>'User not found'],404);
         }
 
-        return response()->json($user);
+        return response()->json([
+            'id'=>$user->id,
+            'name'=>$user->name,
+            'email'=>$user->email,
+            'phone'=>$user->phone,
+            'avatar'=>$user->avatar ? asset('storage/'.$user->avatar) : null,
+            'role'=>$user->role,
+            'resume'=>$user->job_seeker ? asset('storage/'.$user->job_seeker->resume) : null,
+            'bio'=>$user->job_seeker ?  $user->job_seeker->bio : null,
+            'created_at'=>$user->created_at,
+            'updated_at'=>$user->updated_at
+        ]);
     }
 
     /**

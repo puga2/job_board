@@ -18,19 +18,28 @@ class ApplicationController extends Controller
         }
 
         $data = $request->validate([
-            'job_id' => 'required|exists:job_posts,id',
-            'cover_letter' => 'required|string|max:255',
+            'job_post_id' => 'required|exists:job_posts,id',
+            'cover_letter' => 'sometimes|file|mimetypes:application/pdf|max:2048',
         ]);
 
-        $data['job_seeker_id'] = $jobSeeker->id; // ✅ fixed snake_case
-
-        $application = Application::create($data);
+        if (!$request->hasFile('cover_letter')) {
+            return response()->json(['message' => 'cover_letter file missing'], 422);
+        }
+        $path = $request->file('cover_letter')->store('cover_letters', 'public');
+        $data['cover_letter'] = $path;
+        
+        $application = Application::create([
+            'job_post_id' => $data['job_post_id'],
+            'job_seeker_id' => $jobSeeker->user_id, // ✅ must match your migration
+            'cover_letter' => $data['cover_letter'],
+        ]);
 
         return response()->json([
             'message' => 'Application submitted successfully',
             'data' => $application
-        ], 200);
+        ], 201);
     }
+
 
     /**
      * List all applications for the authenticated job seeker.
@@ -120,4 +129,3 @@ class ApplicationController extends Controller
         ], 200);
     }
 }
-    
